@@ -16,16 +16,13 @@ public class GameManager : MonoBehaviour
     private int score;
 
     public TextMeshProUGUI gameOverText;
-    public Button restartButton; 
+    public Button restartButton;
+
+    public GameObject titleScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-        isGameActive = true;
-        StartCoroutine(SpawnTarget());
-
-        score = 0;
-        scoreText.text = "Score: " + score;
 
     }
 
@@ -61,5 +58,17 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void StartGame(int difficulty)
+    {
+        spawnRate /= difficulty;
+
+        isGameActive = true;
+        StartCoroutine(SpawnTarget());
+
+        score = 0;
+        scoreText.text = "Score: " + score;
+        titleScreen.SetActive(false);
     }
 }
